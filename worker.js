@@ -20,7 +20,7 @@ export default class Logger extends WorkerEntrypoint {
         const log = this.getLogger();
         await log.error({
             message: `Error state from ${name}`,
-            message: msg,
+            description: msg,
             error: err
         });
     }
@@ -29,7 +29,7 @@ export default class Logger extends WorkerEntrypoint {
         const log = this.getLogger();
         await log.warn({
             message: `Error state from ${name}`,
-            message: msg,
+            description: msg,
         });
     }
 

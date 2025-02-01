@@ -5,9 +5,6 @@ preview_urls = false
 send_metrics = false
 workers_dev = false
 
-[vars]
-SERVICE_NAME = "Cloudflare Logger"
-
 [observability]
 enabled = true
 head_sampling_rate = 1

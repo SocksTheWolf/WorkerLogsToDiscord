@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "node-discord-logger": "^1.2.2",
+    "minimal-discord-webhook-node": "^1.0.1",
     "wrangler": "^3.107.2"
   },
   "overrides": {

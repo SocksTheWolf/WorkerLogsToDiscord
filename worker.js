@@ -1,36 +1,48 @@
 import { WorkerEntrypoint } from "cloudflare:workers";
-import DiscordLogger from 'node-discord-logger';
+import { Webhook, MessageBuilder } from 'minimal-discord-webhook-node';
 
 export default class Logger extends WorkerEntrypoint {
     getLogger() {
-        return new DiscordLogger({
-            hook: this.env.WEB_HOOK,
-            serviceName: this.env.SERVICE_NAME
+        return new Webhook({
+            url: this.env.WEB_HOOK,
+            throwErrors: false,
+            retryOnLimit: true
         });
     }
     async postLog(name, msg) {
         const log = this.getLogger();
-        await log.info({
-            message: `Log message from ${name}`,
-            description: msg,
-        });
+        log.setUsername(name);
+
+        const embed = new MessageBuilder()
+        .setTitle(`Log message from ${name}`)
+        .setDescription(msg)
+        .setColor("#f0f6fc")
+        .setTimestamp();
+
+        await hook.send(embed);
     }
 
     async postError(name, msg, err=null) {
         const log = this.getLogger();
-        await log.error({
-            message: `Error state from ${name}`,
-            description: msg,
-            error: err
-        });
+        log.setUsername(name);
+
+        const embed = new MessageBuilder()
+        .setTitle(`Error state from ${name}`)
+        .setDescription(msg)
+        .setColor("#ff6041")
+        .setTimestamp();
+        await hook.send(embed);
     }
 
     async postWarning(name, msg) {
         const log = this.getLogger();
-        await log.warn({
-            message: `Error state from ${name}`,
-            description: msg,
-        });
+        log.setUsername(name);
+
+        const embed = new MessageBuilder()
+        .setTitle(`New Warning from ${name}`)
+        .setDescription(msg)
+        .setColor("#ff9640")
+        .setTimestamp();
     }
 
     // basically return nothing

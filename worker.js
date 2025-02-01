@@ -24,4 +24,12 @@ export default class Logger extends WorkerEntrypoint {
             error: err
         });
     }
+
+    async postWarning(name, msg) {
+        const log = this.getLogger();
+        await log.warn({
+            message: `Error state from ${name}`,
+            message: msg,
+        });
+    }
 };

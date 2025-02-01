@@ -32,4 +32,9 @@ export default class Logger extends WorkerEntrypoint {
             message: msg,
         });
     }
+
+    // basically return nothing
+    async fetch(request, env, ctx) {
+        return new Response('Hello World!');
+    }
 };

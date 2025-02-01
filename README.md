@@ -1,2 +1,3 @@
 # WorkerLogsToDiscord
- Project for updating worker logs automatically to discord
+
+ Project for updating cloudflare worker logs automatically to discord webhook

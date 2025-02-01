@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "node-discord-logger": "^1.2.2",
+    "wrangler": "^3.107.2"
+  },
+  "overrides": {
+    "superagent": "10.1.1"
+  }
+}

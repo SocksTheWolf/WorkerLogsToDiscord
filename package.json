@@ -2,8 +2,5 @@
   "dependencies": {
     "minimal-discord-webhook-node": "^1.0.1",
     "wrangler": "^3.107.2"
-  },
-  "overrides": {
-    "superagent": "10.1.1"
   }
 }

@@ -22,7 +22,7 @@ export default class Logger extends WorkerEntrypoint {
         await log.send(embed);
     }
 
-    async postError(name, msg, err=null) {
+    async postError(name, msg) {
         const log = this.getLogger();
         log.setUsername(name);
 

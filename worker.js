@@ -19,7 +19,7 @@ export default class Logger extends WorkerEntrypoint {
         .setColor("#f0f6fc")
         .setTimestamp();
 
-        await hook.send(embed);
+        await log.send(embed);
     }
 
     async postError(name, msg, err=null) {
@@ -31,7 +31,7 @@ export default class Logger extends WorkerEntrypoint {
         .setDescription(msg)
         .setColor("#ff6041")
         .setTimestamp();
-        await hook.send(embed);
+        await log.send(embed);
     }
 
     async postWarning(name, msg) {
@@ -43,6 +43,7 @@ export default class Logger extends WorkerEntrypoint {
         .setDescription(msg)
         .setColor("#ff9640")
         .setTimestamp();
+        await log.send(embed);
     }
 
     // basically return nothing

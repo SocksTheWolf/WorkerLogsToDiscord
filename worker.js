@@ -2,22 +2,16 @@ import { WorkerEntrypoint } from "cloudflare:workers";
 import { Webhook, MessageBuilder } from 'minimal-discord-webhook-node';
 
 export default class Logger extends WorkerEntrypoint {
-    hookURL = null
-
-    setWebhook(newLocation) {
-        this.hookURL = newLocation;
-    }
-
-    getLogger() {
-        const webhookLocation = (hookURL === null) ? this.env.WEB_HOOK : this.hookURL;
+    getLogger(hookURL=null) {
+        const webhookLocation = (hookURL === null) ? this.env.WEB_HOOK : hookURL;
         return new Webhook({
             url: webhookLocation,
             throwErrors: false,
             retryOnLimit: true
         });
     }
-    async postLog(name, msg) {
-        const log = this.getLogger();
+    async postLog(name, msg, hookURL=null) {
+        const log = this.getLogger(hookURL);
         log.setUsername(name);
 
         const embed = new MessageBuilder()
@@ -29,8 +23,8 @@ export default class Logger extends WorkerEntrypoint {
         await log.send(embed);
     }
 
-    async postError(name, msg) {
-        const log = this.getLogger();
+    async postError(name, msg, hookURL=null) {
+        const log = this.getLogger(hookURL);
         log.setUsername(name);
 
         const embed = new MessageBuilder()
@@ -41,8 +35,8 @@ export default class Logger extends WorkerEntrypoint {
         await log.send(embed);
     }
 
-    async postWarning(name, msg) {
-        const log = this.getLogger();
+    async postWarning(name, msg, hookURL=null) {
+        const log = this.getLogger(hookURL);
         log.setUsername(name);
 
         const embed = new MessageBuilder()

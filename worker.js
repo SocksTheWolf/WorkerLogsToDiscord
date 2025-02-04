@@ -2,9 +2,16 @@ import { WorkerEntrypoint } from "cloudflare:workers";
 import { Webhook, MessageBuilder } from 'minimal-discord-webhook-node';
 
 export default class Logger extends WorkerEntrypoint {
+    hookURL = null
+
+    setWebhook(newLocation) {
+        this.hookURL = newLocation;
+    }
+
     getLogger() {
+        const webhookLocation = (hookURL === null) ? this.env.WEB_HOOK : this.hookURL;
         return new Webhook({
-            url: this.env.WEB_HOOK,
+            url: webhookLocation,
             throwErrors: false,
             retryOnLimit: true
         });

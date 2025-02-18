@@ -1,10 +1,14 @@
 # WorkerLogsToDiscord
 
-Project for updating cloudflare worker logs automatically to discord webhook
+This hackjob of a worker allows you to push execution logs of any worker to a Discord webhook.
 
-To use:
+## Setup
 
-* Add the following to your worker:
+Clone this repository and upload it to Cloudflare Workers. Add a `WEB_HOOK` secret on your Cloudflare dashboard that contains the Discord webhook url.
+
+## To Log a Worker
+
+* Add this code somewhere in the target worker's code.
 
 ```js
 const Logger = {
@@ -44,9 +48,9 @@ const Logger = {
 };
 ```
 
-* Call the function `Logger.configure(env);` on any entrypoint to your application.
+* Call the function `Logger.configure(env);` on any entrypoint to your target worker.
 
-* Add the following to your `worker.toml`:
+* Add the following to your target `worker.toml`:
 
 ```
 services = [
@@ -59,3 +63,5 @@ USE_LOG_FORWARDER = "true"
 # worker name (used for logging)
 WORKER_NAME = "NAME OF SERVICE"
 ```
+
+* When logging, replace any `console.` with `await Logger.`. Log, Warn, Error are all provided.

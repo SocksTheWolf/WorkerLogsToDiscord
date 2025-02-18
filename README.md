@@ -18,7 +18,7 @@ const Logger = {
 
   configure: function(env) {
       this.logger = env.LOGGER;
-      this.serviceName = env.WORKER_NAME;
+      this.serviceName = env.WORKER_NAME || "Worker";
       this.useForwarder = env.USE_LOG_FORWARDER === "true";
   },
   log: async function(msg) {

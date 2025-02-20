@@ -8,7 +8,7 @@ Clone this repository and upload it to Cloudflare Workers. Add a `WEB_HOOK` secr
 
 ## To Log a Worker
 
-* Add this code somewhere in the target worker's code.
+* Add this code somewhere in the worker's code.
 
 ```js
 const Logger = {
@@ -21,15 +21,15 @@ const Logger = {
       this.serviceName = env.WORKER_NAME || "Worker";
       this.useForwarder = env.USE_LOG_FORWARDER === "true";
   },
-  log: async function(msg) {
+  log: async function(msg, hookOverride=null) {
       if (!this.useForwarder)
       {
           console.log(`${this.serviceName}: ${msg}`);
           return;
       }
-      await this.logger.postLog(this.serviceName, msg);
+      await this.logger.postLog(this.serviceName, msg, hookOverride);
   },
-  error: async function(msg) {
+  error: async function(msg, hookOverride=null) {
       if (!this.useForwarder)
       {
           console.error(`${this.serviceName}: ${msg}`);
@@ -37,7 +37,7 @@ const Logger = {
       }
       await this.logger.postError(this.serviceName, msg);
   },
-  warn: async function(msg) {
+  warn: async function(msg, hookOverride=null) {
         if (!this.useForwarder)
         {
             console.warn(`${this.serviceName}: ${msg}`);
@@ -48,11 +48,11 @@ const Logger = {
 };
 ```
 
-* Call the function `Logger.configure(env);` on any entrypoint to your target worker.
+* Call the function `Logger.configure(env);` on any entrypoint to your worker (`fetch`, `schedule`, etc).
 
-* Add the following to your target `worker.toml`:
+* Add the following to your `worker.toml`:
 
-```
+```toml
 services = [
   { binding = "LOGGER", service = "workerlogstodiscord" },
 ]
@@ -64,4 +64,4 @@ USE_LOG_FORWARDER = "true"
 WORKER_NAME = "NAME OF SERVICE"
 ```
 
-* When logging, replace any `console.` with `await Logger.`. Log, Warn, Error are all provided.
+* When logging, replace any `console.` with `await Logger.`. Log, Warn, Error redirectors are all provided.

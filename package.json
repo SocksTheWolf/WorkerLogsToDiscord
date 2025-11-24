@@ -3,6 +3,6 @@
     "minimal-discord-webhook-node": "^1.0.1"
   },
   "devDependencies": {
-    "wrangler": "^4.45.3"
+    "wrangler": "^4.50.0"
   }
 }

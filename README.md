@@ -47,6 +47,7 @@ const Logger = {
     }
 };
 ```
+(Or you can use the `logger.ts` file)
 
 * Call the function `Logger.configure(env);` on any entrypoint to your worker (`fetch`, `schedule`, etc).
 

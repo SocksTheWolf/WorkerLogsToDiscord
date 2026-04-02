@@ -9,6 +9,11 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+      semver-minor-days: 12
+      semver-patch-days: 7
     open-pull-requests-limit: 1
     ignore:
       - dependency-name: 'wrangler'

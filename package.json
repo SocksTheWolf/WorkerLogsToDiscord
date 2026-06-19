@@ -1,8 +1,11 @@
 {
+  "scripts": {
+    "run": "wrangler types"
+  },
   "dependencies": {
     "minimal-discord-webhook-node": "^1.0.1"
   },
   "devDependencies": {
-    "wrangler": "^4.75.0"
+    "wrangler": "^4.102.0"
   }
 }

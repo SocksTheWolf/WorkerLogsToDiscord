@@ -1,19 +1,21 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2
+registries:
+  npm:
+    type: "npm-registry"
+    url: "https://registry.npmjs.org"
+    token: ${{secrets.GH_DUMMY}}
+    replaces-base: true
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "monthly"
+      interval: "weekly"
     cooldown:
       default-days: 7
       semver-major-days: 30
       semver-minor-days: 12
-      semver-patch-days: 7
-    open-pull-requests-limit: 1
+    open-pull-requests-limit: 3
+    registries:
+      - npm
     ignore:
       - dependency-name: 'wrangler'

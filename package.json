@@ -6,7 +6,7 @@
     "minimal-discord-webhook-node": "^1.0.1"
   },
   "devDependencies": {
-    "wrangler": "^4.124.0"
+    "wrangler": "^4.125.0"
   },
   "overrides": {
     "@actions/github": {

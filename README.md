@@ -2,6 +2,8 @@
 
 This hackjob of a worker allows you to push execution logs of any worker to a Discord webhook.
 
+> This code has been archived. It's now being handled by Tail Loggers instead.
+
 ## Setup
 
 Clone this repository and upload it to Cloudflare Workers. Add a `WEB_HOOK` secret on your Cloudflare dashboard that contains the Discord webhook url.
